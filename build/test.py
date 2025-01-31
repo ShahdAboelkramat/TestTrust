@@ -23,7 +23,7 @@ canvas = Canvas(
         window,
         bg="#FFFFFF",
         height=650,
-        width=1280,
+        width=1150,
         bd=0,
         highlightthickness=0,
         relief="ridge"
