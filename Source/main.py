@@ -7,26 +7,26 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Toplevel, Label, Entry, Button,Tk, Canvas, Text, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from login import open_login_window
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"G:\TestTrust\Tkinter-Designer-master\Source\assets\frame0")
+ASSETS_PATH = OUTPUT_PATH / Path(r"G:\TestTrust\Tkinter-Designer-master\new\build\assets\frame0")
 
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 
-home_window = Tk()
-home_window.geometry("1150x650")
-home_window.configure(bg = "#F5F1EB")
-home_window.title("TestTrust")
+window = Tk()
+
+window.geometry("1150x650")
+window.configure(bg = "#F5F1EB")
 
 
 canvas = Canvas(
-    home_window,
+    window,
     bg = "#F5F1EB",
     height = 650,
     width = 1150,
@@ -39,8 +39,8 @@ canvas.place(x = 0, y = 0)
 canvas.create_rectangle(
     0.0,
     0.0,
-    1150.0,
-    77.0,
+    1178.0,
+    84.0,
     fill="#D9D9D9",
     outline="")
 
@@ -50,17 +50,49 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: open_login_window(home_window),
+    command=lambda: open_login_window(window),
     relief="flat"
 )
 button_1.place(
-    x=1039.0,
+    x=942.0,
     y=32.0,
-    width=91.0,
+    width=92.0,
     height=32.0
 )
 
+button_image_2 = PhotoImage(
+    file=relative_to_assets("button_2.png"))
+button_2 = Button(
+    image=button_image_2,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("button_2 clicked"),
+    relief="flat"
+)
+button_2.place(
+    x=821.0,
+    y=32.0,
+    width=106.0,
+    height=28.0
+)
 
+canvas.create_text(
+    52.0,
+    135.0,
+    anchor="nw",
+    text="Welcome to the \nTestTrust Community ",
+    fill="#EB5E28",
+    font=("Anton Regular", 64 * -1)
+)
+
+canvas.create_text(
+    67.0,
+    335.0,
+    anchor="nw",
+    text="The place to get support, create assignments, correct answers ,\n Add students and assign exams. Monitor live exams in real-time,\n and contribute to the open source learning platform,TestTrust LMS.",
+    fill="#A78C8C",
+    font=("AnticDidone Regular", 14 * -1)
+)
 
 button_image_3 = PhotoImage(
     file=relative_to_assets("button_3.png"))
@@ -72,44 +104,18 @@ button_3 = Button(
     relief="flat"
 )
 button_3.place(
-    x=823.0,
-    y=30.0,
-    width=101.0,
-    height=22.0
-)
-
-canvas.create_text(
-    127.0,
-    154.0,
-    anchor="nw",
-    text="Welcome to the \nTestTrust Community ",
-    fill="#EB5E28",
-    font=("Anton Regular", 64 * -1)
-)
-
-canvas.create_text(
-    130.0,
-    359.0,
-    anchor="nw",
-    text="The place to get support, create assignments, correct answers ,Add students and assign exams.\n Monitor live exams in real-time, and contribute to the open source learning platform,TestTrust LMS.",
-    fill="#A78C8C",
-    font=("AnticDidone Regular", 14 * -1)
-)
-
-button_image_4 = PhotoImage(
-    file=relative_to_assets("button_4.png"))
-button_4 = Button(
-    image=button_image_4,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
-    relief="flat"
-)
-button_4.place(
-    x=149.0,
-    y=544.0,
+    x=94.0,
+    y=527.0,
     width=149.0,
     height=36.0
 )
-home_window.resizable(False, False)
-home_window.mainloop()
+
+image_image_1 = PhotoImage(
+    file=relative_to_assets("image_1.png"))
+image_1 = canvas.create_image(
+    926.0,
+    370.0,
+    image=image_image_1
+)
+window.resizable(False, False)
+window.mainloop()
