@@ -12,7 +12,7 @@ from login import open_login_window
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"G:\TestTrust\Tkinter-Designer-master\new\build\assets\frame0")
+ASSETS_PATH = OUTPUT_PATH / Path(r"G:\TestTrust\Tkinter-Designer-master\Source\assets\frame0")
 
 
 def relative_to_assets(path: str) -> Path:
@@ -60,20 +60,20 @@ button_1.place(
     height=32.0
 )
 
-button_image_2 = PhotoImage(
-    file=relative_to_assets("button_2.png"))
-button_2 = Button(
-    image=button_image_2,
+button_image_3 = PhotoImage(
+    file=relative_to_assets("button_3.png"))
+button_3 = Button(
+    image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
+    command=lambda: print("button_3 clicked"),
     relief="flat"
 )
-button_2.place(
-    x=821.0,
-    y=32.0,
-    width=106.0,
-    height=28.0
+button_3.place(
+    x=823.0,
+    y=30.0,
+    width=101.0,
+    height=22.0
 )
 
 canvas.create_text(
@@ -94,18 +94,18 @@ canvas.create_text(
     font=("AnticDidone Regular", 14 * -1)
 )
 
-button_image_3 = PhotoImage(
-    file=relative_to_assets("button_3.png"))
-button_3 = Button(
-    image=button_image_3,
+button_image_4 = PhotoImage(
+    file=relative_to_assets("button_4.png"))
+button_4 = Button(
+    image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=lambda: print("button_4 clicked"),
     relief="flat"
 )
-button_3.place(
-    x=94.0,
-    y=527.0,
+button_4.place(
+    x=149.0,
+    y=544.0,
     width=149.0,
     height=36.0
 )
