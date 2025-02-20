@@ -3,13 +3,14 @@ from dotenv import load_dotenv , find_dotenv
 import os 
 import pprint
 import gridfs
+import json
 load_dotenv(find_dotenv())
  
 
 password=os.environ.get("mongo_pass")
 
 
-connection_str= f"mongodb+srv://shahd:{password}@cluster0.uz1ff.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+connection_str= f"mongodb://localhost:27017"
 
 client=MongoClient(connection_str)
 
