@@ -20,7 +20,7 @@ def relative_to_assets(path: str) -> Path:
 
 window = Tk()
 
-window.geometry("1280x650")
+window.geometry("1270x650")
 window.configure(bg = "#FFFFFF")
 
 
@@ -28,7 +28,7 @@ canvas = Canvas(
     window,
     bg = "#FFFFFF",
     height = 650,
-    width = 1280,
+    width = 1270,
     bd = 0,
     highlightthickness = 0,
     relief = "ridge"
@@ -45,45 +45,11 @@ canvas.create_rectangle(
 
 canvas.create_rectangle(
     0.0,
-    48.0,
-    326.0,
-    681.0,
+    74.0,
+    219.25189208984375,
+    660.0,
     fill="#D9D9D9",
     outline="")
-
-canvas.create_rectangle(
-    0.0,
-    0.0,
-    1279.0,
-    89.0,
-    fill="#D9D9D9",
-    outline="")
-
-canvas.create_text(
-    345.0,
-    100.0,
-    anchor="nw",
-    text="welcome back shahd!",
-    fill="#EB5E28",
-    font=("AbrilFatface Regular", 30 * -1)
-)
-
-image_image_1 = PhotoImage(
-    file=relative_to_assets("image_1.png"))
-image_1 = canvas.create_image(
-    1032.0,
-    379.0,
-    image=image_image_1
-)
-
-canvas.create_text(
-    104.0,
-    83.0,
-    anchor="nw",
-    text="Dashboard",
-    fill="#EB5E28",
-    font=("AbrilFatface Regular", 20 * -1)
-)
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
@@ -95,62 +61,11 @@ button_1 = Button(
     relief="flat"
 )
 button_1.place(
-    x=10.0,
-    y=20.0,
-    width=226.0,
-    height=49.0
+    x=13.0,
+    y=270.0,
+    width=191.0,
+    height=30.17543601989746
 )
-
-canvas.create_rectangle(
-    354.0,
-    187.0,
-    813.0,
-    570.0,
-    fill="#D9D9D9",
-    outline="")
-
-canvas.create_text(
-    368.0,
-    198.0,
-    anchor="nw",
-    text="materials ",
-    fill="#403D39",
-    font=("AbrilFatface Regular", 20 * -1)
-)
-
-canvas.create_text(
-    522.0,
-    200.0,
-    anchor="nw",
-    text="Department ",
-    fill="#403D39",
-    font=("AbrilFatface Regular", 20 * -1)
-)
-
-canvas.create_text(
-    702.0,
-    202.0,
-    anchor="nw",
-    text="Year ",
-    fill="#403D39",
-    font=("AbrilFatface Regular", 20 * -1)
-)
-
-canvas.create_rectangle(
-    666.000000102161,
-    220.0,
-    671.0,
-    570.0000179050294,
-    fill="#EB5E28",
-    outline="")
-
-canvas.create_rectangle(
-    485.00000010216104,
-    220.0,
-    490.0,
-    570.0000179050294,
-    fill="#EB5E28",
-    outline="")
 
 button_image_2 = PhotoImage(
     file=relative_to_assets("button_2.png"))
@@ -162,10 +77,10 @@ button_2 = Button(
     relief="flat"
 )
 button_2.place(
-    x=28.0,
-    y=160.0,
-    width=248.0,
-    height=66.0
+    x=10.0,
+    y=175.0,
+    width=175.0,
+    height=29.0
 )
 
 button_image_3 = PhotoImage(
@@ -178,10 +93,10 @@ button_3 = Button(
     relief="flat"
 )
 button_3.place(
-    x=28.0,
-    y=250.0,
-    width=234.0,
-    height=57.0
+    x=16.0,
+    y=225.0,
+    width=167.0,
+    height=24.0
 )
 
 button_image_4 = PhotoImage(
@@ -194,10 +109,44 @@ button_4 = Button(
     relief="flat"
 )
 button_4.place(
-    x=29.0,
-    y=331.0,
-    width=288.0,
-    height=78.0
+    x=3.0,
+    y=321.0,
+    width=216.0,
+    height=27.28788185119629
+)
+
+canvas.create_text(
+    55.0,
+    92.0,
+    anchor="nw",
+    text="Dashboard",
+    fill="#EB5E28",
+    font=("AbrilFatface Regular", 20 * -1)
+)
+
+canvas.create_rectangle(
+    0.0,
+    0.0,
+    1288.0,
+    89.0,
+    fill="#D9D9D9",
+    outline="")
+
+canvas.create_text(
+    844.0,
+    25.0,
+    anchor="nw",
+    text="welcome back shahd!",
+    fill="#EB5E28",
+    font=("AbrilFatface Regular", 30 * -1)
+)
+
+image_image_1 = PhotoImage(
+    file=relative_to_assets("image_1.png"))
+image_1 = canvas.create_image(
+    609.0,
+    45.0,
+    image=image_image_1
 )
 
 button_image_5 = PhotoImage(
@@ -210,10 +159,102 @@ button_5 = Button(
     relief="flat"
 )
 button_5.place(
-    x=21.0,
-    y=450.0,
-    width=267.0,
-    height=46.0
+    x=10.0,
+    y=20.0,
+    width=226.0,
+    height=49.0
 )
+
+canvas.create_rectangle(
+    219.0,
+    89.0,
+    1270.0,
+    136.0,
+    fill="#000000",
+    outline="")
+
+canvas.create_text(
+    257.9615478515625,
+    92.0,
+    anchor="nw",
+    text="Exam status",
+    fill="#EB5E28",
+    font=("AbrilFatface Regular", 24 * -1)
+)
+
+canvas.create_rectangle(
+    219.0,
+    362.0,
+    1270.0,
+    412.0,
+    fill="#000000",
+    outline="")
+
+canvas.create_text(
+    257.0750427246094,
+    368.0,
+    anchor="nw",
+    text="Upcoming Exams",
+    fill="#EB5E28",
+    font=("AbrilFatface Regular", 24 * -1)
+)
+
+image_image_2 = PhotoImage(
+    file=relative_to_assets("image_2.png"))
+image_2 = canvas.create_image(
+    103.0,
+    538.0,
+    image=image_image_2
+)
+
+canvas.create_text(
+    217.0,
+    154.0,
+    anchor="nw",
+    text="                    IT          4TH          1:30:00          CCNAIV          30/30            A201                                                                                            ",
+    fill="#000000",
+    font=("AbrilFatface Regular", 20 * -1)
+)
+
+canvas.create_text(
+    216.0,
+    431.0,
+    anchor="nw",
+    text="                    IT          4TH          1:30:00          IOT Security           A201           25/3/2025                                                                                 ",
+    fill="#000000",
+    font=("AbrilFatface Regular", 20 * -1)
+)
+
+canvas.create_rectangle(
+    235.99999737731832,
+    139.99999934306288,
+    1211.0,
+    200.0,
+    fill="#000000",
+    outline="")
+
+canvas.create_rectangle(
+    234.99999737731832,
+    415.9999993430629,
+    1210.0,
+    476.0,
+    fill="#000000",
+    outline="")
+
+canvas.create_rectangle(
+    1233.0,
+    136.0,
+    1262.0,
+    361.0,
+    fill="#000000",
+    outline="")
+
+canvas.create_rectangle(
+    1233.0,
+    416.0,
+    1262.0,
+    641.0,
+    fill="#000000",
+    outline="")
 window.resizable(False, False)
 window.mainloop()
