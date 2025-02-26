@@ -7,24 +7,19 @@ import json
 load_dotenv(find_dotenv())
  
 
-password=os.environ.get("mongo_pass")
+#password=os.environ.get("mongo_pass")
 
 
 connection_str= f"mongodb://localhost:27017"
 
 client=MongoClient(connection_str)
-
-
-db=client.assignments 
-coll=db.exam 
-
-
+db=client.testtrust 
 fs = gridfs.GridFS(db)  # Initialize GridFS
 
 
 #Uploads a PDF or Word file to MongoDB
 
-def upload_file(file_path):
+'''def upload_file(file_path):
     try:
         with open(file_path, "rb") as f:
             file_id = fs.put(f, filename=os.path.basename(file_path))
@@ -37,7 +32,7 @@ def upload_file(file_path):
  
 if __name__ == "__main__":
     file_path = input("Enter the file path: ")  # Get file path from user
-    upload_file(file_path)
+    upload_file(file_path)'''
 
 
 

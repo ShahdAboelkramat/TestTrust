@@ -1,8 +1,12 @@
 
+from flask import Flask, request, jsonify
 from tkinter import Toplevel, Label, Entry, Button, Tk, Canvas, PhotoImage
 from pathlib import Path
+from werkzeug.security import generate_password_hash
 from login import open_login_window
+from signup_handler import signup_user  
 
+from connectionmongo import db
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -26,6 +30,23 @@ def open_signup_window(parent):
         window.destroy()
 
     
+
+    def submit_signup():
+       user_data = {
+        "first_name": entry_1.get(),
+        "last_name": entry_2.get(),
+        "id_number": entry_3.get(),
+        "position": entry_4.get(),
+        "email": entry_5.get(),
+        "password": entry_6.get()}
+
+       response, status_code = signup_user(user_data)
+
+       if status_code == 201:
+          print(response["message"])  
+          print(response["error"])  
+    
+
     canvas = Canvas(
         window,
         bg="#FFFFFF",
@@ -89,7 +110,7 @@ def open_signup_window(parent):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=submit_signup,
         relief="flat"
     )
     button_1.image = button_image_1

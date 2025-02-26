@@ -1,5 +1,6 @@
 from pathlib import Path
 from tkinter import Toplevel, Label, Entry, Button, Canvas, PhotoImage
+from login_handler import login_user  
 
 def relative_to_assets(path: str) -> Path:
     ASSETS_PATH = Path(r"G:\TestTrust\Tkinter-Designer-master\Source\assets\frame3")
@@ -16,6 +17,21 @@ def open_login_window(parent):
     def on_close():
         parent.deiconify()
         window.destroy()
+    
+
+
+    def submit_login():
+        username = entry_1.get().strip()  
+        password = entry_2.get().strip()  
+        response, status_code = login_user(username, password)
+
+        if status_code == 200:
+           print(response["message"]) 
+           window.destroy() 
+           #open_home_window(parent)
+        else:
+           print(response["error"])  
+
     
     # Canvas
     canvas = Canvas(
@@ -51,7 +67,7 @@ def open_login_window(parent):
     button_1.place(x=703.0, y=376.0, width=143.0, height=24.0)
 
     button_image_2 = PhotoImage(file=relative_to_assets("button_2.png"))
-    button_2 = Button(window, image=button_image_2, borderwidth=0, highlightthickness=0, command=lambda: print("Button 2 clicked"), relief="flat")
+    button_2 = Button(window, image=button_image_2, borderwidth=0, highlightthickness=0, command=submit_login, relief="flat")
     button_2.image = button_image_2
     button_2.place(x=529.0, y=412.0, width=213.0, height=38.0)
 
