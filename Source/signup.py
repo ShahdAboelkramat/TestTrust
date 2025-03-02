@@ -4,9 +4,10 @@ from tkinter import Toplevel, Label, Entry, Button, Tk, Canvas, PhotoImage
 from pathlib import Path
 from werkzeug.security import generate_password_hash
 from login import open_login_window
-from signup_handler import signup_user  
-
 from connectionmongo import db
+
+coll=db.instructor
+
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -29,23 +30,6 @@ def open_signup_window(parent):
         parent.deiconify()
         window.destroy()
 
-    
-
-    def submit_signup():
-       user_data = {
-        "first_name": entry_1.get(),
-        "last_name": entry_2.get(),
-        "id_number": entry_3.get(),
-        "position": entry_4.get(),
-        "email": entry_5.get(),
-        "password": entry_6.get()}
-
-       response, status_code = signup_user(user_data)
-
-       if status_code == 201:
-          print(response["message"])  
-          print(response["error"])  
-    
 
     canvas = Canvas(
         window,
@@ -103,6 +87,51 @@ def open_signup_window(parent):
     canvas.create_text(352.0, 302.0, anchor="nw", text="Email", fill="#797373", font=("Inter Medium", 14 * -1))
     canvas.create_text(352.0, 381.0, anchor="nw", text="Password\n", fill="#797373", font=("Inter Medium", 14 * -1))
     canvas.create_text(605.0, 144.0, anchor="nw", text="Last Name", fill="#797373", font=("Inter Medium", 14 * -1))
+
+    error_label = Label(window, text="", fg="red", font=("Inter", 11), bg="#FFFFFF")
+    error_label.place(x=352, y=460)
+
+    entries = [entry_1, entry_2, entry_3, entry_4, entry_5, entry_6]
+    def check_entries():
+        empty_fields = [i+1 for i, entry in enumerate(entries) if not entry.get().strip()]
+    
+        if empty_fields:
+         error_label.config(text="⚠️ Please fill all fields!")
+        else:
+         error_label.config(text="")
+
+           
+         first_name = entry_1.get().strip()
+         last_name = entry_2.get().strip()
+         id_number = entry_4.get().strip()
+         position = entry_3.get().strip()
+         email = entry_5.get().strip()
+         password = entry_6.get().strip()
+
+         window.update_idletasks()
+
+         hashed_password = generate_password_hash(password)
+         user_data = {
+            "first_name": first_name,
+            "last_name": last_name,
+            "id_number": id_number,
+            "position": position,
+            "email": email,
+            "password": hashed_password
+        }
+         existing=coll.find_one({
+           "$or": [
+            {"email": user_data["email"]},
+            {"id_number": user_data["id_number"]}
+        ]
+})
+         if existing:
+          error_label.config(text="⚠️ User already exists!")  
+
+         if not existing:
+          error_label.config(text="✅ User registered successfully")  
+          coll.insert_one(user_data)
+
     
     button_image_1 = PhotoImage(file=relative_to_assets("button_1.png"))
     button_1 = Button(
@@ -110,7 +139,7 @@ def open_signup_window(parent):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=submit_signup,
+        command=check_entries,
         relief="flat"
     )
     button_1.image = button_image_1
