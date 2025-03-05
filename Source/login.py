@@ -1,6 +1,6 @@
 from pathlib import Path
 from tkinter import Toplevel, Label, Entry, Button, Canvas, PhotoImage
-#from login_handler import login_user  
+from signup import user_data
 
 def relative_to_assets(path: str) -> Path:
     ASSETS_PATH = Path(r"G:\TestTrust\Tkinter-Designer-master\Source\assets\frame3")
@@ -19,20 +19,6 @@ def open_login_window(parent):
         window.destroy()
     
 
-
-    '''def submit_login():
-        username = entry_1.get().strip()  
-        password = entry_2.get().strip()  
-        response, status_code = login_user(username, password)
-
-        if status_code == 200:
-           print(response["message"]) 
-           window.destroy() 
-           #open_home_window(parent)
-        else:
-           print(response["error"])  '''
-
-    
     # Canvas
     canvas = Canvas(
         window,
@@ -61,13 +47,39 @@ def open_login_window(parent):
     entry_2.place(x=425.0, y=315.0, width=415.0, height=49.0)
     canvas.create_text(419.0, 282.0, anchor="nw", text="Password", fill="#403D39", font=("Inter", 20 * -1))
 
+
+    error_label = Label(window, text="", fg="red", font=("Inter", 11), bg="#FFFFFF")
+    error_label.place(x=352, y=600)
+
+    entries = [entry_1, entry_2]
+
+
+    def check_entries():
+        empty_fields = [i+1 for i, entry in enumerate(entries) if not entry.get().strip()]
+
+        if empty_fields:
+         error_label.config(text="⚠️ Please fill all fields!")
+        else:
+          error_label.config(text="")
+        
+          if not user_data["email"] == entry_1.get().strip() and user_data["password"] == entry_2.get().strip():
+              error_label.config(text="⚠️ Invalid email or password")
+          elif user_data["email"] == entry_1.get().strip():
+              error_label.config(text="⚠️ Invalid email ")
+          elif user_data["password"] == entry_2.get().strip():
+              error_label.config(text="⚠️ Incorrect password")
+          else:
+              error_label.config(text="⚠️ welcome")
+
+        
+
     button_image_1 = PhotoImage(file=relative_to_assets("button_1.png"))
     button_1 = Button(window, image=button_image_1, borderwidth=0, highlightthickness=0, command=lambda: print("Login clicked"), relief="flat")
     button_1.image = button_image_1
     button_1.place(x=703.0, y=376.0, width=143.0, height=24.0)
 
     button_image_2 = PhotoImage(file=relative_to_assets("button_2.png"))
-    button_2 = Button(window, image=button_image_2, borderwidth=0, highlightthickness=0, command='''submit_login''', relief="flat")
+    button_2 = Button(window, image=button_image_2, borderwidth=0, highlightthickness=0, command=check_entries, relief="flat")
     button_2.image = button_image_2
     button_2.place(x=529.0, y=412.0, width=213.0, height=38.0)
 
