@@ -5,6 +5,7 @@ from pathlib import Path
 from werkzeug.security import generate_password_hash
 from login import open_login_window
 from connectionmongo import db
+import re
 
 coll=db.instructor
 
@@ -78,7 +79,7 @@ def open_signup_window(parent):
     
     entry_image_6 = PhotoImage(file=relative_to_assets("entry_6.png"))
     entry_bg_6 = canvas.create_image(595.0, 426.5, image=entry_image_6)
-    entry_6 = Entry(window,bd=0, bg="#FFFFFF", fg="#000716", highlightthickness=0)
+    entry_6 = Entry(window,bd=0, bg="#FFFFFF", fg="#000716", highlightthickness=0, show="*")
     entry_6.place(x=340.0, y=399.0, width=510.0, height=53.0)
     
     canvas.create_text(352.0, 144.0, anchor="nw", text="First Name", fill="#797373", font=("Inter Medium", 14 * -1))
@@ -92,6 +93,10 @@ def open_signup_window(parent):
     error_label.place(x=352, y=460)
 
     entries = [entry_1, entry_2, entry_3, entry_4, entry_5, entry_6]
+
+
+
+
     def check_entries():
         empty_fields = [i+1 for i, entry in enumerate(entries) if not entry.get().strip()]
     
@@ -107,10 +112,19 @@ def open_signup_window(parent):
          position = entry_3.get().strip()
          email = entry_5.get().strip()
          password = entry_6.get().strip()
-
-         window.update_idletasks()
-
+         window.update_idletasks() #refresh the input fileds 
          hashed_password = generate_password_hash(password)
+
+         def is_valid_gmail(email):
+           gmail_pattern = r"^[a-zA-Z0-9]+@gmail\.com$"
+           return re.match(gmail_pattern, email)
+         
+
+         def is_valid_password(password):
+           password_pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+           return re.match(password_pattern, password)
+         
+       
          user_data = {
             "first_name": first_name,
             "last_name": last_name,
@@ -119,20 +133,41 @@ def open_signup_window(parent):
             "email": email,
             "password": hashed_password
         }
-         existing=coll.find_one({
+         
+
+         
+    
+         
+         
+         existing1=coll.find_one({
            "$or": [
             {"email": user_data["email"]},
             {"id_number": user_data["id_number"]}
         ]
-})
-         if existing:
-          error_label.config(text="⚠️ User already exists!")  
-
-         if not existing:
+})       
+          
+        if existing1:
+           
+           existing_email_match = existing1["email"] == user_data["email"]
+           existing_id_match = existing1["id_number"] == user_data["id_number"]
+           if existing1["email"] == user_data["email"] and existing1["id_number"] ==user_data["id_number"]:
+              error_label.config(text="⚠️ Email and ID already exist!")
+           elif existing1["email"] == user_data["email"]:
+              error_label.config(text="⚠️ Gmail already exists")
+           elif  existing1["id_number"] == user_data["id_number"]:
+              error_label.config(text="⚠️ ID already exists")
+           elif not is_valid_gmail(email):
+              error_label.config(text="⚠️ Please enter a valid Gmail address!")
+              return
+           elif not is_valid_password(password):
+              error_label.config(text="⚠️ Password must be at least 8 characters and contain upper, lower, and numbers!")
+              return
+           elif not id_number.isdigit or len(id_number) != 5:
+              error_label.config(text="⚠️ Please enter a valid ID!")
+        else:
           error_label.config(text="✅ User registered successfully")  
           coll.insert_one(user_data)
 
-    
     button_image_1 = PhotoImage(file=relative_to_assets("button_1.png"))
     button_1 = Button(
         window,
