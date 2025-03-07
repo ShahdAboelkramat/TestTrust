@@ -1,6 +1,12 @@
 from pathlib import Path
 from tkinter import Toplevel, Label, Entry, Button, Canvas, PhotoImage
-from signup import user_data
+from werkzeug.security import check_password_hash
+import re 
+from connectionmongo import db
+
+
+
+coll=db.instructor
 
 def relative_to_assets(path: str) -> Path:
     ASSETS_PATH = Path(r"G:\TestTrust\Tkinter-Designer-master\Source\assets\frame3")
@@ -48,31 +54,42 @@ def open_login_window(parent):
     canvas.create_text(419.0, 282.0, anchor="nw", text="Password", fill="#403D39", font=("Inter", 20 * -1))
 
 
+
+
+
+
     error_label = Label(window, text="", fg="red", font=("Inter", 11), bg="#FFFFFF")
-    error_label.place(x=352, y=600)
+    error_label.place(x=352, y=400)
 
     entries = [entry_1, entry_2]
-
-
+   
     def check_entries():
         empty_fields = [i+1 for i, entry in enumerate(entries) if not entry.get().strip()]
 
         if empty_fields:
          error_label.config(text="⚠️ Please fill all fields!")
+         return
+        
+        email1 = entry_1.get().strip()
+        password1 = entry_2.get().strip()
+
+        window.update_idletasks()  # تحديث النافذة لضمان تحديث الحقول
+
+        def is_valid_gmail(email):
+         gmail_pattern = r"^[a-zA-Z0-9]+@gmail\.com$"
+         return re.match(gmail_pattern, email)
+        
+        user = coll.find_one({"email": email1})
+
+        if user:  
+         if not check_password_hash(user["password"], password1):
+            error_label.config(text="⚠️ Incorrect password!")            
+         else:
+           username=user["first_name"]
+           
         else:
-          error_label.config(text="")
-        
-          if not user_data["email"] == entry_1.get().strip() and user_data["password"] == entry_2.get().strip():
-              error_label.config(text="⚠️ Invalid email or password")
-          elif user_data["email"] == entry_1.get().strip():
-              error_label.config(text="⚠️ Invalid email ")
-          elif user_data["password"] == entry_2.get().strip():
-              error_label.config(text="⚠️ Incorrect password")
-          else:
-              error_label.config(text="⚠️ welcome")
-
-        
-
+         error_label.config(text="⚠️ Email not found!")
+   
     button_image_1 = PhotoImage(file=relative_to_assets("button_1.png"))
     button_1 = Button(window, image=button_image_1, borderwidth=0, highlightthickness=0, command=lambda: print("Login clicked"), relief="flat")
     button_1.image = button_image_1

@@ -1,4 +1,3 @@
-
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from signup import open_signup_window
@@ -136,3 +135,4 @@ image_2 = canvas.create_image(
 )
 window.resizable(False, False)
 window.mainloop()
+ 
