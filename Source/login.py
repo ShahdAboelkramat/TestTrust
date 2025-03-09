@@ -70,25 +70,30 @@ def open_login_window(parent):
          error_label.config(text="⚠️ Please fill all fields!")
          return
         
+           
+        
         email1 = entry_1.get().strip()
         password1 = entry_2.get().strip()
 
-        window.update_idletasks()  # تحديث النافذة لضمان تحديث الحقول
+        window.update_idletasks()  
 
-        def is_valid_gmail(email):
-         gmail_pattern = r"^[a-zA-Z0-9]+@gmail\.com$"
-         return re.match(gmail_pattern, email)
+        def is_valid_gmail(email1):
+           gmail_pattern = r"^[a-zA-Z0-9]+@gmail\.com$"
+           return re.match(gmail_pattern, email1)
         
-        user = coll.find_one({"email": email1})
+        user = coll.find_one()
 
-        if user:  
-         if not check_password_hash(user["password"], password1):
-            error_label.config(text="⚠️ Incorrect password!")            
-         else:
-           username=user["first_name"]
-           
+        if user or not user:  
+           email2=email1   
+           if not is_valid_gmail(email1):
+             error_label.config(text="⚠️ Invalid email!")
+           elif  email1 != user["email"]:
+             error_label.config(text="⚠️ Email not found!")
+           elif not check_password_hash(user["password"], password1):
+             error_label.config(text="⚠️ Incorrect password!")   
         else:
-         error_label.config(text="⚠️ Email not found!")
+            error_label.config(text="welcome")
+
    
     button_image_1 = PhotoImage(file=relative_to_assets("button_1.png"))
     button_1 = Button(window, image=button_image_1, borderwidth=0, highlightthickness=0, command=lambda: print("Login clicked"), relief="flat")

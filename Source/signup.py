@@ -151,7 +151,7 @@ def open_signup_window(parent):
            existing_email_match = existing1["email"] == user_data["email"]
            existing_id_match = existing1["id_number"] == user_data["id_number"]
            if existing_email_match and existing_id_match:
-              error_label.config(text="⚠️ Email and ID already exist!")
+              error_label.config(text="⚠️ User already exist!")
            elif existing1["email"] == user_data["email"]:
               error_label.config(text="⚠️ Gmail already exists")
            elif  existing1["id_number"] == user_data["id_number"]:
