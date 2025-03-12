@@ -22,7 +22,7 @@ Test Trust is a secure examination system designed to prevent cheating using fin
 ## Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/ShahdAboelkramat/test-trust.git
+   git clone https://github.com/ShahdAboelkramat/TestTrust.git
    ```
 2. Open the project in Visual Studio.
 3. Install dependencies if required (.venv).
