@@ -102,21 +102,7 @@ canvas.create_text(
     font=("AnticDidone Regular", 14 * -1)
 )
 
-button_image_4 = PhotoImage(
-    file=relative_to_assets("button_4.png"))
-button_4 = Button(
-    image=button_image_4,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
-    relief="flat"
-)
-button_4.place(
-    x=270.0,
-    y=517.0,
-    width=254.0327911376953,
-    height=39.0
-)
+
 image_image_1 = PhotoImage(
     file=relative_to_assets("image_1.png"))
 image_1 = canvas.create_image(

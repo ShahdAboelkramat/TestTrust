@@ -133,7 +133,7 @@ def open_signup_window(parent):
             error_label.config(text="⚠️ Password must be at least 8 characters and contain upper, lower, and numbers!")
             return
          
-         if not id_number.isdigit or len(id_number) != 5:
+         if not id_number.isdigit() or len(id_number) != 5:
             error_label.config(text="⚠️ Please enter a valid ID!")
             return
          
