@@ -4,7 +4,7 @@ from signup import open_signup_window
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"G:\TestTrust\Tkinter-Designer-master\Source\assets\frame0")
+ASSETS_PATH = OUTPUT_PATH / Path(r"G:\TestTrust\Application\Source\assets\frame0")
 
 
 def relative_to_assets(path: str) -> Path:
@@ -117,7 +117,6 @@ button_4.place(
     width=254.0327911376953,
     height=39.0
 )
-
 image_image_1 = PhotoImage(
     file=relative_to_assets("image_1.png"))
 image_1 = canvas.create_image(

@@ -9,7 +9,7 @@ from connectionmongo import db
 coll=db.instructor
 
 def relative_to_assets(path: str) -> Path:
-    ASSETS_PATH = Path(r"G:\TestTrust\Tkinter-Designer-master\Source\assets\frame3")
+    ASSETS_PATH = Path(r"G:\TestTrust\Application\Source\assets\frame3")
     return ASSETS_PATH / Path(path)
 
 def open_login_window(parent):
@@ -67,31 +67,32 @@ def open_login_window(parent):
         empty_fields = [i+1 for i, entry in enumerate(entries) if not entry.get().strip()]
 
         if empty_fields:
+         
          error_label.config(text="⚠️ Please fill all fields!")
          return
+        else:
         
            
         
-        email1 = entry_1.get().strip()
-        password1 = entry_2.get().strip()
+         email1 = entry_1.get().strip()
+         password1 = entry_2.get().strip()
 
-        window.update_idletasks()  
+         window.update_idletasks()  
 
-        def is_valid_gmail(email1):
+         def is_valid_gmail(email1):
            gmail_pattern = r"^[a-zA-Z0-9]+@gmail\.com$"
            return re.match(gmail_pattern, email1)
         
-        user = coll.find_one()
+         user = coll.find_one({"email":email1})
 
-        if user or not user:  
-           email2=email1   
-           if not is_valid_gmail(email1):
+            
+         if not is_valid_gmail(email1):
              error_label.config(text="⚠️ Invalid email!")
-           elif  email1 != user["email"]:
+         elif  user is None:
              error_label.config(text="⚠️ Email not found!")
-           elif not check_password_hash(user["password"], password1):
+         elif not check_password_hash(user["password"], password1):
              error_label.config(text="⚠️ Incorrect password!")   
-        else:
+         else:
             error_label.config(text="welcome")
 
    

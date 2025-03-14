@@ -12,7 +12,7 @@ coll=db.instructor
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"G:\TestTrust\Tkinter-Designer-master\Source\assets\frame1")
+ASSETS_PATH = OUTPUT_PATH / Path(r"G:\TestTrust\Application\Source\assets\frame1")
 
 
 def relative_to_assets(path: str) -> Path:
@@ -124,6 +124,19 @@ def open_signup_window(parent):
            password_pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
            return re.match(password_pattern, password)
          
+
+         if not is_valid_gmail(email):
+            error_label.config(text="⚠️ Please enter a valid Gmail address!")
+            return
+         
+         if not is_valid_password(password):
+            error_label.config(text="⚠️ Password must be at least 8 characters and contain upper, lower, and numbers!")
+            return
+         
+         if not id_number.isdigit or len(id_number) != 5:
+            error_label.config(text="⚠️ Please enter a valid ID!")
+            return
+         
        
          user_data = {
             "first_name": first_name,
@@ -134,37 +147,22 @@ def open_signup_window(parent):
             "password": hashed_password
         }
          
-
-         
-    
-         
-         
          existing1=coll.find_one({
            "$or": [
             {"email": user_data["email"]},
-            {"id_number": user_data["id_number"]}
-        ]
-})       
+            {"id_number": user_data["id_number"]}]})       
           
-        if existing1:
-           
+         if existing1 :
            existing_email_match = existing1["email"] == user_data["email"]
            existing_id_match = existing1["id_number"] == user_data["id_number"]
+
            if existing_email_match and existing_id_match:
               error_label.config(text="⚠️ User already exist!")
            elif existing1["email"] == user_data["email"]:
               error_label.config(text="⚠️ Gmail already exists")
            elif  existing1["id_number"] == user_data["id_number"]:
               error_label.config(text="⚠️ ID already exists")
-           if not is_valid_gmail(email):
-            error_label.config(text="⚠️ Please enter a valid Gmail address!")
-            return
-           if not is_valid_password(password):
-            error_label.config(text="⚠️ Password must be at least 8 characters and contain upper, lower, and numbers!")
-            return
-           if not id_number.isdigit or len(id_number) != 5:
-            error_label.config(text="⚠️ Please enter a valid ID!")
-        else:
+         else:
           error_label.config(text="✅ User registered successfully")  
           coll.insert_one(user_data)
 
