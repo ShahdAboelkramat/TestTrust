@@ -37,12 +37,6 @@ def open_home_window(parent, username):
         fill="#D9D9D9",
         outline="black")
     
-    button_2.place(
-        x=821.0,
-        y=32.0,
-        width=106.0,
-        height=28.0
-    )
     button_image_2 = PhotoImage(
         file=relative_to_assets("button_2.png"))
     button_2 = Button(
@@ -129,14 +123,20 @@ def open_home_window(parent, username):
     )
     user_button = Button(
         window,
-        text=f"Welcome, {username}!",
-        font=("Arial", 14),
-        bg="#FFA500",
-        fg="white",
+        borderwidth=0,
+        highlightthickness=0,
+        text=f"welcome {username}!",
+        font=("AnticDidone Regular", 18,"bold" ) , 
+        bg="#D9D9D9",
+        fg="#403D39",
         command=lambda: print(f"User: {username}")
     )
-    canvas.create_window(600, 200, window=user_button)  # إضافة الزر داخل الـ Canvas
-    
+    user_button.place(
+        x=950.0,
+        y=32.0,
+        width=254.0327911376953,
+        height=39.0
+    )
     window.resizable(False, False)
     window.mainloop()
 
