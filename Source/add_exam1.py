@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from PIL import Image, ImageTk  # For handling images
 
-class AddExamApp:
+class AddExam1:
     def __init__(self, root):
         self.root = root
         self.root.title("Test Trust")
@@ -178,5 +178,5 @@ class AddExamApp:
 # Run the application
 if __name__ == "__main__":
     root = tk.Tk()
-    app = AddExamApp(root)
+    app = AddExam1(root)
     root.mainloop()
